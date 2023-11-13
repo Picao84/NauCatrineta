@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "Nau Catrineta": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Godot_v4.1.1-stable_mono_win64\\Godot_v4.1.1-stable_mono_win64\\Godot_v4.1.1-stable_mono_win64.exe",
+      "commandLineArgs": "--path \"C:\\Users\\tiago\\OneDrive\\Documents\\Nau Catrineta\"",
+      "workingDirectory": "C:\\Godot_v4.1.1-stable_mono_win64\\Godot_v4.1.1-stable_mono_win64",
+      "nativeDebugging": true
+    }
+  }
+}
