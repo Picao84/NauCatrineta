@@ -15,6 +15,7 @@ public partial class WaveCollisionArea : Area2D
         {
             QueueFree();
             caravela.Crash();
+            GetParent<Wave>().Crash();
         }
     }
 

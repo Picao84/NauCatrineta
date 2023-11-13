@@ -8,6 +8,7 @@ public partial class RogueWave : Path2D
     PathFollow2D path;
     Polygon2D wavePolygon;
     public Camera2D camera { get; set; }
+    bool shouldUpdatePath = true;
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
@@ -22,13 +23,27 @@ public partial class RogueWave : Path2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-        path.Progress = (float)(path.Progress + delta * 150);
-        var cameraPosition = camera.GlobalPosition.X;
-        if (path.GlobalPosition.X + wavePolygon.Polygon.Max(x => x.X) < cameraPosition)
+        if (shouldUpdatePath)
         {
-            QueueFree();
+            path.Progress = (float)(path.Progress + delta * 150);
+            var cameraPosition = camera.GlobalPosition.X;
+            if (path.GlobalPosition.X + wavePolygon.Polygon.Max(x => x.X) < cameraPosition)
+            {
+                QueueFree();
+            }
         }
+    }
 
+    public void Crash()
+    {
+        shouldUpdatePath = false;
+        ZIndex = 2;
+        player.Play("Wave Down");
+        player.AnimationFinished += Player_AnimationFinished;
+    }
 
+    private void Player_AnimationFinished(StringName animName)
+    {
+        QueueFree();
     }
 }

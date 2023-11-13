@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://bgk7uqdtpr8rm"]
+[gd_scene load_steps=12 format=3 uid="uid://bgk7uqdtpr8rm"]
 
 [ext_resource type="Texture2D" uid="uid://dnsvl7wimsexl" path="res://Assets/Nau Catrineta.png" id="1_g4130"]
 [ext_resource type="Script" path="res://Scripts/Caravela.cs" id="1_m0ctk"]
 [ext_resource type="Texture2D" uid="uid://dnlgw7nmthwje" path="res://Assets/wave.png" id="3_aifyd"]
+[ext_resource type="Material" uid="uid://nbgdgn0t7hgv" path="res://waterMaterialExplosion.tres" id="4_nkmeg"]
 
 [sub_resource type="Gradient" id="Gradient_nxydv"]
 colors = PackedColorArray(0.982343, 0.982342, 0.982342, 1, 0, 0.501961, 0.501961, 1)
@@ -224,7 +225,6 @@ polygon = PackedVector2Array(24.7191, -3.37079, 50.5618, 28.0899, 80.8989, 71.34
 uv = PackedVector2Array(24.7191, -3.37079, 50.5618, 28.0899, 80.8989, 71.3483, 94.382, 91.573, 122.472, 128.652, 152.809, 155.056, 168.539, 179.214, 180.899, 204.494, 153.371, 232.022, 103.933, 250, 39.8876, 256.742, 2.24719, 212.36, -6.74158, 157.865, -7.86517, 107.865, 1.1236, 52.809, 7.30338, 12.9213)
 
 [node name="Caravela Collision Polygon" type="CollisionPolygon2D" parent="Caravela"]
-visible = false
 polygon = PackedVector2Array(6, 666, 99, 680, 229, 680, 305, 674, 376, 663, 424, 661, 379, 732, 309, 768, 194, 784, 60, 765, 6, 732)
 
 [node name="Wave" type="Polygon2D" parent="Caravela"]
@@ -261,3 +261,13 @@ polygon = PackedVector2Array(-22.6667, 630.667, 148, 653.333, 576, 637.333, 573.
 [node name="CrashPolygon" type="CollisionPolygon2D" parent="Caravela"]
 position = Vector2(-1.33334, -17.3333)
 polygon = PackedVector2Array(9.33334, 657.333, -4, 725.333, 30.6667, 772, 184, 788, 365.333, 780, 445.333, 682.667, 365.333, 654.667, 85.3333, 650.667)
+
+[node name="CrashParticles" type="GPUParticles2D" parent="Caravela"]
+z_index = 3
+position = Vector2(398.667, 692)
+emitting = false
+amount = 5000
+process_material = ExtResource("4_nkmeg")
+lifetime = 2.5
+one_shot = true
+speed_scale = 2.0

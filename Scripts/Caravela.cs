@@ -10,7 +10,8 @@ public partial class Caravela : CharacterBody2D
 	AnimationPlayer player;
 	Camera2D camera;
 	GpuParticles2D particles;
-	List<Node> flags = new List<Node>();
+    GpuParticles2D crashParticles;
+    List<Node> flags = new List<Node>();
 
 	// Get the gravity from the project settings to be synced with RigidBody nodes.
 	public float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
@@ -24,7 +25,8 @@ public partial class Caravela : CharacterBody2D
 		camera = GetParent().GetParent().GetNode<Camera2D>("Camera2D");
 		player = GetNode<AnimationPlayer>("Caravela Animation");
 		particles = GetNode<GpuParticles2D>("Caravela Particles");
-		flags.AddRange(GetChildren().Where(x => x.Name.ToString().Contains("Flag")));
+        crashParticles = GetNode<GpuParticles2D>("CrashParticles");
+        flags.AddRange(GetChildren().Where(x => x.Name.ToString().Contains("Flag")));
 		flags.Reverse();
 		player.SpeedScale = 1.5f;
     }
@@ -66,7 +68,6 @@ public partial class Caravela : CharacterBody2D
 			velocity.X = Mathf.MoveToward(Velocity.X, 100f, Speed);
             velocity.Y = Mathf.MoveToward(Velocity.Y, 0, Speed);
             particles.ZIndex = 0;
-			particles.Emitting = false;
 
         }
 
@@ -81,6 +82,11 @@ public partial class Caravela : CharacterBody2D
 	{
 		if(Lives > 0)
 		{
+			var lastCollision = GetLastSlideCollision();
+			crashParticles.GlobalPosition = lastCollision.GetPosition();
+			crashParticles.Emitting = true;
+			var animation = player.GetAnimation("Moving Forward");
+			animation.RemoveTrack(0);
 			flags[Lives-1].QueueFree();
 			Lives--;
 		}
