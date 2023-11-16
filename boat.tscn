@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bgk7uqdtpr8rm"]
+[gd_scene load_steps=13 format=3 uid="uid://bgk7uqdtpr8rm"]
 
 [ext_resource type="Texture2D" uid="uid://dnsvl7wimsexl" path="res://Assets/Nau Catrineta.png" id="1_g4130"]
 [ext_resource type="Script" path="res://Scripts/Caravela.cs" id="1_m0ctk"]
@@ -192,6 +192,19 @@ _data = {
 "Standing Still": SubResource("Animation_p32w7")
 }
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nhpcc"]
+emission_shape = 1
+emission_sphere_radius = 30.0
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 200.0
+initial_velocity_max = 200.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 2.0
+scale_max = 5.0
+color = Color(0.333333, 0.133333, 0, 1)
+
 [node name="Boat" type="Node2D"]
 z_index = 1
 
@@ -225,6 +238,7 @@ polygon = PackedVector2Array(24.7191, -3.37079, 50.5618, 28.0899, 80.8989, 71.34
 uv = PackedVector2Array(24.7191, -3.37079, 50.5618, 28.0899, 80.8989, 71.3483, 94.382, 91.573, 122.472, 128.652, 152.809, 155.056, 168.539, 179.214, 180.899, 204.494, 153.371, 232.022, 103.933, 250, 39.8876, 256.742, 2.24719, 212.36, -6.74158, 157.865, -7.86517, 107.865, 1.1236, 52.809, 7.30338, 12.9213)
 
 [node name="Caravela Collision Polygon" type="CollisionPolygon2D" parent="Caravela"]
+visible = false
 polygon = PackedVector2Array(6, 666, 99, 680, 229, 680, 305, 674, 376, 663, 424, 661, 379, 732, 309, 768, 194, 784, 60, 765, 6, 732)
 
 [node name="Wave" type="Polygon2D" parent="Caravela"]
@@ -236,6 +250,7 @@ polygon = PackedVector2Array(2.08333, 35.6771, 24.4792, 31.7708, 40.3646, 27.083
 uv = PackedVector2Array(2.08333, 35.6771, 24.4792, 31.7708, 40.3646, 27.0833, 55.9896, 19.5313, 77.3437, 13.0208, 97.6562, 8.85417, 111.979, 7.8125, 130.729, 11.7188, 149.74, 17.4479, 173.958, 25.5208, 192.708, 29.6875, 208.333, 28.125, 234.635, 19.0104, 263.281, 7.8125, 286.198, 1.82292, 304.688, 1.5625, 326.302, 7.03125, 351.563, 15.625, 378.125, 23.4375, 386.979, 23.6979, 400.781, 17.4479, 423.698, 7.55208, 446.875, 0.520832, 466.927, -1.04167, 476.823, 0.78125, 514.062, 14.3229, 545.573, 21.875, 569.531, 23.1771, 580.208, 157.031, 569.531, 162.24, 526.042, 165.365, 195.833, 158.333, 52.3437, 168.229, 16.4063, 167.969, 2.86458, 160.677, 2.60416, 145.313, 2.34375, 58.3333)
 
 [node name="Caravela Particles" type="GPUParticles2D" parent="Caravela"]
+visible = false
 position = Vector2(354.667, 737.333)
 amount = 1000
 process_material = SubResource("ParticleProcessMaterial_2np1c")
@@ -262,7 +277,7 @@ polygon = PackedVector2Array(-22.6667, 630.667, 148, 653.333, 576, 637.333, 573.
 position = Vector2(-1.33334, -17.3333)
 polygon = PackedVector2Array(9.33334, 657.333, -4, 725.333, 30.6667, 772, 184, 788, 365.333, 780, 445.333, 682.667, 365.333, 654.667, 85.3333, 650.667)
 
-[node name="CrashParticles" type="GPUParticles2D" parent="Caravela"]
+[node name="WaveCrashParticles" type="GPUParticles2D" parent="Caravela"]
 z_index = 3
 position = Vector2(398.667, 692)
 emitting = false
@@ -271,3 +286,10 @@ process_material = ExtResource("4_nkmeg")
 lifetime = 2.5
 one_shot = true
 speed_scale = 2.0
+
+[node name="RockCrashParticles" type="GPUParticles2D" parent="Caravela"]
+position = Vector2(374.667, 749.333)
+emitting = false
+amount = 200
+process_material = SubResource("ParticleProcessMaterial_nhpcc")
+one_shot = true

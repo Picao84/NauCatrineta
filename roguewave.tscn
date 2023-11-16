@@ -39,46 +39,6 @@ color_ramp = SubResource("GradientTexture1D_jh7y2")
 turbulence_noise_strength = 0.0
 turbulence_noise_scale = 1.68
 
-[sub_resource type="Animation" id="Animation_nnqm8"]
-resource_name = "Wave Up"
-length = 2.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PathFollow2D/Wave/Body:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0.75, 0.75)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("PathFollow2D/Wave/Body:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("PathFollow2D/Wave/Body/Caravela Particles:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-
 [sub_resource type="Animation" id="Animation_tb57l"]
 resource_name = "Wave Down"
 length = 2.0
@@ -119,6 +79,46 @@ tracks/2/keys = {
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_nnqm8"]
+resource_name = "Wave Up"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PathFollow2D/Wave/Body:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0.75, 0.75)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PathFollow2D/Wave/Body:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PathFollow2D/Wave/Body/Caravela Particles:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ue8pk"]
 _data = {
 "Wave Down": SubResource("Animation_tb57l"),
@@ -139,35 +139,34 @@ scale = Vector2(0.999222, 1)
 script = ExtResource("2_17nok")
 
 [node name="Body" type="Polygon2D" parent="PathFollow2D/Wave"]
-modulate = Color(1, 1, 1, 0)
 position = Vector2(-244.487, 328.524)
 rotation = 3.14159
+scale = Vector2(0.75, 0.75)
 texture = ExtResource("1_l342q")
 polygon = PackedVector2Array(167.557, 24.8092, 156.107, 41.6031, 140.84, 52.6718, 127.863, 65.2672, 117.557, 82.8244, 108.015, 106.87, 98.4733, 135.496, 97.3282, 162.977, 102.672, 188.931, 113.74, 206.489, 130.916, 209.16, 146.565, 204.962, 159.16, 174.046, 159.16, 198.855, 169.084, 208.015, 182.443, 209.542, 186.641, 216.412, 175.954, 251.145, 158.397, 286.641, 133.206, 313.359, 113.359, 343.893, 95.0381, 360.687, 59.1603, 374.427, 29.771, 386.26, 2.29007, 399.237, -10.687, 411.069, 11.0687, 418.321, 55.7252, 424.809, 115.649, 416.031, 159.542, 412.214, 206.87, 415.267, 259.16, 401.527, 319.466, 400.763, 422.901, 408.015, 487.405, 407.252, 536.641, 407.252, 561.45, 394.275, 538.55, 375.191, 506.87, 350.382, 479.008, 335.115, 449.237, 290.076, 427.863, 251.145, 396.947, 168.321, 388.168, 102.29, 364.504, 35.4962, 319.084, 1.14504, 263.74, -11.4504, 218.702, -11.0687, 187.405, 3.8168)
 uv = PackedVector2Array(167.557, 24.8092, 156.107, 41.6031, 140.84, 52.6718, 127.863, 65.2672, 117.557, 82.8244, 108.015, 106.87, 98.4733, 135.496, 97.3282, 162.977, 102.672, 188.931, 113.74, 206.489, 130.916, 209.16, 146.565, 204.962, 159.16, 174.046, 159.16, 198.855, 169.084, 208.015, 182.443, 209.542, 186.641, 216.412, 175.954, 251.145, 158.397, 286.641, 133.206, 313.359, 113.359, 343.893, 95.0381, 360.687, 59.1603, 374.427, 29.771, 386.26, 2.29007, 399.237, -10.687, 411.069, 11.0687, 418.321, 55.7252, 424.809, 115.649, 416.031, 159.542, 412.214, 206.87, 415.267, 259.16, 401.527, 319.466, 400.763, 422.901, 408.015, 487.405, 407.252, 536.641, 407.252, 561.45, 394.275, 538.55, 375.191, 506.87, 350.382, 479.008, 335.115, 449.237, 290.076, 427.863, 251.145, 396.947, 168.321, 388.168, 102.29, 364.504, 35.4962, 319.084, 1.14504, 263.74, -11.4504, 218.702, -11.0687, 187.405, 3.8168)
 
-[node name="FrontArea" type="Area2D" parent="PathFollow2D/Wave/Body"]
+[node name="WaveFrontArea" type="Area2D" parent="PathFollow2D/Wave/Body"]
 position = Vector2(-2293.78, 111.392)
 rotation = -0.00213599
 scale = Vector2(1.33437, 1.33333)
 script = ExtResource("4_fbtwl")
 
-[node name="FrontAreaPolygon" type="CollisionPolygon2D" parent="PathFollow2D/Wave/Body/FrontArea"]
+[node name="FrontAreaPolygon" type="CollisionPolygon2D" parent="PathFollow2D/Wave/Body/WaveFrontArea"]
 position = Vector2(0, 2)
 polygon = PackedVector2Array(1733, 101, 1732, -85, 2162, -85, 2159, 102)
 
-[node name="BackArea" type="Area2D" parent="PathFollow2D/Wave/Body"]
+[node name="WaveBackArea" type="Area2D" parent="PathFollow2D/Wave/Body"]
 position = Vector2(-2293.78, 111.392)
 rotation = -0.00213599
 scale = Vector2(1.33437, 1.33333)
 script = ExtResource("3_umij4")
 
-[node name="BackAreaPolygon" type="CollisionPolygon2D" parent="PathFollow2D/Wave/Body/BackArea"]
+[node name="BackAreaPolygon" type="CollisionPolygon2D" parent="PathFollow2D/Wave/Body/WaveBackArea"]
 position = Vector2(-1, 1)
 polygon = PackedVector2Array(1734, 103, 2158, 104, 2158, 241, 2157, 289, 1729, 289)
 
 [node name="Caravela Particles" type="GPUParticles2D" parent="PathFollow2D/Wave/Body"]
-modulate = Color(1, 1, 1, 0)
 position = Vector2(38.6824, 402.952)
 rotation = 2.12161
 scale = Vector2(1.00078, 1)

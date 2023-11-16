@@ -10,7 +10,8 @@ public partial class Caravela : CharacterBody2D
 	AnimationPlayer player;
 	Camera2D camera;
 	GpuParticles2D particles;
-    GpuParticles2D crashParticles;
+    GpuParticles2D waveCrashParticles;
+    GpuParticles2D rockCrashParticles;
     List<Node> flags = new List<Node>();
 
 	// Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -25,7 +26,8 @@ public partial class Caravela : CharacterBody2D
 		camera = GetParent().GetParent().GetNode<Camera2D>("Camera2D");
 		player = GetNode<AnimationPlayer>("Caravela Animation");
 		particles = GetNode<GpuParticles2D>("Caravela Particles");
-        crashParticles = GetNode<GpuParticles2D>("CrashParticles");
+        waveCrashParticles = GetNode<GpuParticles2D>("WaveCrashParticles");
+        rockCrashParticles = GetNode<GpuParticles2D>("RockCrashParticles");
         flags.AddRange(GetChildren().Where(x => x.Name.ToString().Contains("Flag")));
 		flags.Reverse();
 		player.SpeedScale = 1.5f;
@@ -78,13 +80,22 @@ public partial class Caravela : CharacterBody2D
 		camera.Position = new Vector2(Position.X - 200, camera.Position.Y);
     }
 
-	public void Crash()
+	public void Crash(bool isWave = true)
 	{
 		if(Lives > 0)
 		{
 			var lastCollision = GetLastSlideCollision();
-			crashParticles.GlobalPosition = lastCollision.GetPosition();
-			crashParticles.Emitting = true;
+
+			if (isWave)
+			{
+				waveCrashParticles.GlobalPosition = lastCollision.GetPosition();
+				waveCrashParticles.Emitting = true;
+			}
+			else
+			{
+                rockCrashParticles.GlobalPosition = lastCollision.GetPosition();
+                rockCrashParticles.Emitting = true;
+            }
 			var animation = player.GetAnimation("Moving Forward");
 			animation.RemoveTrack(0);
 			flags[Lives-1].QueueFree();

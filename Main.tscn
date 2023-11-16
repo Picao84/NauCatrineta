@@ -1,13 +1,24 @@
-[gd_scene load_steps=3 format=3 uid="uid://b2tgu2ppv0oqw"]
+[gd_scene load_steps=8 format=3 uid="uid://b2tgu2ppv0oqw"]
 
 [ext_resource type="Script" path="res://Main.cs" id="1_tekut"]
-[ext_resource type="Texture2D" uid="uid://dnlgw7nmthwje" path="res://Assets/wave.png" id="2_fivvt"]
+[ext_resource type="Texture2D" uid="uid://d26ypofkvj3ne" path="res://Assets/rock1.png" id="2_6rkaa"]
+[ext_resource type="Script" path="res://RockCollisionArea.cs" id="3_3v1l6"]
+[ext_resource type="Script" path="res://BackArea.cs" id="4_r11ot"]
+[ext_resource type="Script" path="res://FrontArea.cs" id="5_2evq8"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_um8lm"]
+a = Vector2(0, 300)
+b = Vector2(9600, 300)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_m0xkj"]
+a = Vector2(0, 1080)
+b = Vector2(9600, 1080)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_tekut")
 
 [node name="Background" type="Polygon2D" parent="."]
-scale = Vector2(10, 1)
+scale = Vector2(5, 1)
 color = Color(0, 0.501961, 0.501961, 1)
 polygon = PackedVector2Array(-1, 2, -0.3, 1081, 1915, 1086, 1918, -9)
 
@@ -16,44 +27,343 @@ position = Vector2(-5, -2)
 scale = Vector2(0.5, 0.5)
 anchor_mode = 0
 
-[node name="Wave" type="Polygon2D" parent="."]
-position = Vector2(1154, 856)
-scale = Vector2(0.75, 1)
-texture = ExtResource("2_fivvt")
-polygon = PackedVector2Array(2.08333, 35.6771, 24.4792, 31.7708, 40.3646, 27.0833, 55.9896, 19.5313, 77.3437, 13.0208, 97.6562, 8.85417, 111.979, 7.8125, 130.729, 11.7188, 149.74, 17.4479, 173.958, 25.5208, 192.708, 29.6875, 208.333, 28.125, 234.635, 19.0104, 263.281, 7.8125, 286.198, 1.82292, 304.688, 1.5625, 326.302, 7.03125, 351.563, 15.625, 378.125, 23.4375, 386.979, 23.6979, 400.781, 17.4479, 423.698, 7.55208, 446.875, 0.520832, 466.927, -1.04167, 476.823, 0.78125, 514.062, 14.3229, 545.573, 21.875, 569.531, 23.1771, 580.208, 157.031, 569.531, 162.24, 526.042, 165.365, 195.833, 158.333, 52.3437, 168.229, 16.4063, 167.969, 2.86458, 160.677, 2.60416, 145.313, 2.34375, 58.3333)
-uv = PackedVector2Array(2.08333, 35.6771, 24.4792, 31.7708, 40.3646, 27.0833, 55.9896, 19.5313, 77.3437, 13.0208, 97.6562, 8.85417, 111.979, 7.8125, 130.729, 11.7188, 149.74, 17.4479, 173.958, 25.5208, 192.708, 29.6875, 208.333, 28.125, 234.635, 19.0104, 263.281, 7.8125, 286.198, 1.82292, 304.688, 1.5625, 326.302, 7.03125, 351.563, 15.625, 378.125, 23.4375, 386.979, 23.6979, 400.781, 17.4479, 423.698, 7.55208, 446.875, 0.520832, 466.927, -1.04167, 476.823, 0.78125, 514.062, 14.3229, 545.573, 21.875, 569.531, 23.1771, 580.208, 157.031, 569.531, 162.24, 526.042, 165.365, 195.833, 158.333, 52.3437, 168.229, 16.4063, 167.969, 2.86458, 160.677, 2.60416, 145.313, 2.34375, 58.3333)
+[node name="Rock1" type="StaticBody2D" parent="."]
+z_index = 2
+position = Vector2(589, 753)
+scale = Vector2(0.5, 0.5)
+skew = 0.0139626
 
-[node name="Wave2" type="Polygon2D" parent="."]
-position = Vector2(615, 175)
-scale = Vector2(0.75, 1)
-texture = ExtResource("2_fivvt")
-polygon = PackedVector2Array(2.08333, 35.6771, 24.4792, 31.7708, 40.3646, 27.0833, 55.9896, 19.5313, 77.3437, 13.0208, 97.6562, 8.85417, 111.979, 7.8125, 130.729, 11.7188, 149.74, 17.4479, 173.958, 25.5208, 192.708, 29.6875, 208.333, 28.125, 234.635, 19.0104, 263.281, 7.8125, 286.198, 1.82292, 304.688, 1.5625, 326.302, 7.03125, 351.563, 15.625, 378.125, 23.4375, 386.979, 23.6979, 400.781, 17.4479, 423.698, 7.55208, 446.875, 0.520832, 466.927, -1.04167, 476.823, 0.78125, 514.062, 14.3229, 545.573, 21.875, 569.531, 23.1771, 580.208, 157.031, 569.531, 162.24, 526.042, 165.365, 195.833, 158.333, 52.3437, 168.229, 16.4063, 167.969, 2.86458, 160.677, 2.60416, 145.313, 2.34375, 58.3333)
-uv = PackedVector2Array(2.08333, 35.6771, 24.4792, 31.7708, 40.3646, 27.0833, 55.9896, 19.5313, 77.3437, 13.0208, 97.6562, 8.85417, 111.979, 7.8125, 130.729, 11.7188, 149.74, 17.4479, 173.958, 25.5208, 192.708, 29.6875, 208.333, 28.125, 234.635, 19.0104, 263.281, 7.8125, 286.198, 1.82292, 304.688, 1.5625, 326.302, 7.03125, 351.563, 15.625, 378.125, 23.4375, 386.979, 23.6979, 400.781, 17.4479, 423.698, 7.55208, 446.875, 0.520832, 466.927, -1.04167, 476.823, 0.78125, 514.062, 14.3229, 545.573, 21.875, 569.531, 23.1771, 580.208, 157.031, 569.531, 162.24, 526.042, 165.365, 195.833, 158.333, 52.3437, 168.229, 16.4063, 167.969, 2.86458, 160.677, 2.60416, 145.313, 2.34375, 58.3333)
+[node name="RockCollisionArea2" type="CollisionPolygon2D" parent="Rock1"]
+position = Vector2(-300, 275)
+polygon = PackedVector2Array(215.826, -0.973145, 171.966, 9.02783, 133.938, 7.02759, 110.692, 61.0328, 67.6134, 127.039, 141.725, 135.04, 221.613, 127.039, 267.641, 129.039, 307.725, 135.04, 369.558, 123.039, 324.776, 67.0334, 262.049, 15.0283)
 
-[node name="Wave3" type="Polygon2D" parent="."]
-position = Vector2(1811, 396)
-scale = Vector2(0.75, 1)
-texture = ExtResource("2_fivvt")
-polygon = PackedVector2Array(2.08333, 35.6771, 24.4792, 31.7708, 40.3646, 27.0833, 55.9896, 19.5313, 77.3437, 13.0208, 97.6562, 8.85417, 111.979, 7.8125, 130.729, 11.7188, 149.74, 17.4479, 173.958, 25.5208, 192.708, 29.6875, 208.333, 28.125, 234.635, 19.0104, 263.281, 7.8125, 286.198, 1.82292, 304.688, 1.5625, 326.302, 7.03125, 351.563, 15.625, 378.125, 23.4375, 386.979, 23.6979, 400.781, 17.4479, 423.698, 7.55208, 446.875, 0.520832, 466.927, -1.04167, 476.823, 0.78125, 514.062, 14.3229, 545.573, 21.875, 569.531, 23.1771, 580.208, 157.031, 569.531, 162.24, 526.042, 165.365, 195.833, 158.333, 52.3437, 168.229, 16.4063, 167.969, 2.86458, 160.677, 2.60416, 145.313, 2.34375, 58.3333)
-uv = PackedVector2Array(2.08333, 35.6771, 24.4792, 31.7708, 40.3646, 27.0833, 55.9896, 19.5313, 77.3437, 13.0208, 97.6562, 8.85417, 111.979, 7.8125, 130.729, 11.7188, 149.74, 17.4479, 173.958, 25.5208, 192.708, 29.6875, 208.333, 28.125, 234.635, 19.0104, 263.281, 7.8125, 286.198, 1.82292, 304.688, 1.5625, 326.302, 7.03125, 351.563, 15.625, 378.125, 23.4375, 386.979, 23.6979, 400.781, 17.4479, 423.698, 7.55208, 446.875, 0.520832, 466.927, -1.04167, 476.823, 0.78125, 514.062, 14.3229, 545.573, 21.875, 569.531, 23.1771, 580.208, 157.031, 569.531, 162.24, 526.042, 165.365, 195.833, 158.333, 52.3437, 168.229, 16.4063, 167.969, 2.86458, 160.677, 2.60416, 145.313, 2.34375, 58.3333)
+[node name="Body" type="Polygon2D" parent="Rock1"]
+position = Vector2(-300, 275)
+texture = ExtResource("2_6rkaa")
+polygon = PackedVector2Array(138.272, -8.02469, 119.136, 29.6296, 98.1482, 78.3951, 65.4321, 109.877, 51.2346, 143.21, 51.2346, 182.716, 123.457, 198.765, 225.926, 195.062, 343.21, 193.21, 431.482, 174.691, 375.309, 98.7654, 285.802, 21.6049, 226.543, -9.87654)
+uv = PackedVector2Array(138.272, -8.02469, 119.136, 29.6296, 98.1482, 78.3951, 65.4321, 109.877, 51.2346, 143.21, 51.2346, 182.716, 123.457, 198.765, 225.926, 195.062, 343.21, 193.21, 431.482, 174.691, 375.309, 98.7654, 285.802, 21.6049, 226.543, -9.87654)
 
-[node name="Wave4" type="Polygon2D" parent="."]
-position = Vector2(2842, 784)
-scale = Vector2(0.75, 1)
-texture = ExtResource("2_fivvt")
-polygon = PackedVector2Array(2.08333, 35.6771, 24.4792, 31.7708, 40.3646, 27.0833, 55.9896, 19.5313, 77.3437, 13.0208, 97.6562, 8.85417, 111.979, 7.8125, 130.729, 11.7188, 149.74, 17.4479, 173.958, 25.5208, 192.708, 29.6875, 208.333, 28.125, 234.635, 19.0104, 263.281, 7.8125, 286.198, 1.82292, 304.688, 1.5625, 326.302, 7.03125, 351.563, 15.625, 378.125, 23.4375, 386.979, 23.6979, 400.781, 17.4479, 423.698, 7.55208, 446.875, 0.520832, 466.927, -1.04167, 476.823, 0.78125, 514.062, 14.3229, 545.573, 21.875, 569.531, 23.1771, 580.208, 157.031, 569.531, 162.24, 526.042, 165.365, 195.833, 158.333, 52.3437, 168.229, 16.4063, 167.969, 2.86458, 160.677, 2.60416, 145.313, 2.34375, 58.3333)
-uv = PackedVector2Array(2.08333, 35.6771, 24.4792, 31.7708, 40.3646, 27.0833, 55.9896, 19.5313, 77.3437, 13.0208, 97.6562, 8.85417, 111.979, 7.8125, 130.729, 11.7188, 149.74, 17.4479, 173.958, 25.5208, 192.708, 29.6875, 208.333, 28.125, 234.635, 19.0104, 263.281, 7.8125, 286.198, 1.82292, 304.688, 1.5625, 326.302, 7.03125, 351.563, 15.625, 378.125, 23.4375, 386.979, 23.6979, 400.781, 17.4479, 423.698, 7.55208, 446.875, 0.520832, 466.927, -1.04167, 476.823, 0.78125, 514.062, 14.3229, 545.573, 21.875, 569.531, 23.1771, 580.208, 157.031, 569.531, 162.24, 526.042, 165.365, 195.833, 158.333, 52.3437, 168.229, 16.4063, 167.969, 2.86458, 160.677, 2.60416, 145.313, 2.34375, 58.3333)
+[node name="RockFrontArea" type="Area2D" parent="Rock1/Body"]
+position = Vector2(300, -275)
+script = ExtResource("5_2evq8")
 
-[node name="Wave5" type="Polygon2D" parent="."]
-position = Vector2(3333, 176)
-scale = Vector2(0.75, 1)
-texture = ExtResource("2_fivvt")
-polygon = PackedVector2Array(2.08333, 35.6771, 24.4792, 31.7708, 40.3646, 27.0833, 55.9896, 19.5313, 77.3437, 13.0208, 97.6562, 8.85417, 111.979, 7.8125, 130.729, 11.7188, 149.74, 17.4479, 173.958, 25.5208, 192.708, 29.6875, 208.333, 28.125, 234.635, 19.0104, 263.281, 7.8125, 286.198, 1.82292, 304.688, 1.5625, 326.302, 7.03125, 351.563, 15.625, 378.125, 23.4375, 386.979, 23.6979, 400.781, 17.4479, 423.698, 7.55208, 446.875, 0.520832, 466.927, -1.04167, 476.823, 0.78125, 514.062, 14.3229, 545.573, 21.875, 569.531, 23.1771, 580.208, 157.031, 569.531, 162.24, 526.042, 165.365, 195.833, 158.333, 52.3437, 168.229, 16.4063, 167.969, 2.86458, 160.677, 2.60416, 145.313, 2.34375, 58.3333)
-uv = PackedVector2Array(2.08333, 35.6771, 24.4792, 31.7708, 40.3646, 27.0833, 55.9896, 19.5313, 77.3437, 13.0208, 97.6562, 8.85417, 111.979, 7.8125, 130.729, 11.7188, 149.74, 17.4479, 173.958, 25.5208, 192.708, 29.6875, 208.333, 28.125, 234.635, 19.0104, 263.281, 7.8125, 286.198, 1.82292, 304.688, 1.5625, 326.302, 7.03125, 351.563, 15.625, 378.125, 23.4375, 386.979, 23.6979, 400.781, 17.4479, 423.698, 7.55208, 446.875, 0.520832, 466.927, -1.04167, 476.823, 0.78125, 514.062, 14.3229, 545.573, 21.875, 569.531, 23.1771, 580.208, 157.031, 569.531, 162.24, 526.042, 165.365, 195.833, 158.333, 52.3437, 168.229, 16.4063, 167.969, 2.86458, 160.677, 2.60416, 145.313, 2.34375, 58.3333)
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Rock1/Body/RockFrontArea"]
+polygon = PackedVector2Array(-254.694, 380.037, -184.722, 378.037, 117.278, 378.037, 110.458, 176.017, -257.57, 174.017)
 
-[node name="Wave6" type="Polygon2D" parent="."]
-position = Vector2(4370, 573)
-scale = Vector2(0.75, 1)
-texture = ExtResource("2_fivvt")
-polygon = PackedVector2Array(2.08333, 35.6771, 24.4792, 31.7708, 40.3646, 27.0833, 55.9896, 19.5313, 77.3437, 13.0208, 97.6562, 8.85417, 111.979, 7.8125, 130.729, 11.7188, 149.74, 17.4479, 173.958, 25.5208, 192.708, 29.6875, 208.333, 28.125, 234.635, 19.0104, 263.281, 7.8125, 286.198, 1.82292, 304.688, 1.5625, 326.302, 7.03125, 351.563, 15.625, 378.125, 23.4375, 386.979, 23.6979, 400.781, 17.4479, 423.698, 7.55208, 446.875, 0.520832, 466.927, -1.04167, 476.823, 0.78125, 514.062, 14.3229, 545.573, 21.875, 569.531, 23.1771, 580.208, 157.031, 569.531, 162.24, 526.042, 165.365, 195.833, 158.333, 52.3437, 168.229, 16.4063, 167.969, 2.86458, 160.677, 2.60416, 145.313, 2.34375, 58.3333)
-uv = PackedVector2Array(2.08333, 35.6771, 24.4792, 31.7708, 40.3646, 27.0833, 55.9896, 19.5313, 77.3437, 13.0208, 97.6562, 8.85417, 111.979, 7.8125, 130.729, 11.7188, 149.74, 17.4479, 173.958, 25.5208, 192.708, 29.6875, 208.333, 28.125, 234.635, 19.0104, 263.281, 7.8125, 286.198, 1.82292, 304.688, 1.5625, 326.302, 7.03125, 351.563, 15.625, 378.125, 23.4375, 386.979, 23.6979, 400.781, 17.4479, 423.698, 7.55208, 446.875, 0.520832, 466.927, -1.04167, 476.823, 0.78125, 514.062, 14.3229, 545.573, 21.875, 569.531, 23.1771, 580.208, 157.031, 569.531, 162.24, 526.042, 165.365, 195.833, 158.333, 52.3437, 168.229, 16.4063, 167.969, 2.86458, 160.677, 2.60416, 145.313, 2.34375, 58.3333)
+[node name="RockBackArea" type="Area2D" parent="Rock1/Body"]
+position = Vector2(300, -275)
+script = ExtResource("4_r11ot")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Rock1/Body/RockBackArea"]
+polygon = PackedVector2Array(-188.694, 380.037, 117.25, 376.036, 122.954, 498.048, -251.074, 496.048, -254.694, 380.037)
+
+[node name="RockCollisionArea" type="Area2D" parent="Rock1"]
+script = ExtResource("3_3v1l6")
+
+[node name="RockCollisionAreaPolygon" type="CollisionPolygon2D" parent="Rock1/RockCollisionArea"]
+position = Vector2(-300, 275)
+polygon = PackedVector2Array(215.826, -0.973145, 171.966, 9.02783, 133.938, 7.02759, 110.692, 61.0328, 67.6134, 127.039, 141.725, 135.04, 221.613, 127.039, 267.641, 129.039, 307.725, 135.04, 369.558, 123.039, 324.776, 67.0334, 262.049, 15.0283)
+
+[node name="Rock2" type="StaticBody2D" parent="."]
+z_index = 2
+position = Vector2(1366, 286)
+scale = Vector2(0.5, 0.5)
+skew = 0.0139626
+
+[node name="RockCollisionArea2" type="CollisionPolygon2D" parent="Rock2"]
+position = Vector2(-300, 275)
+polygon = PackedVector2Array(215.826, -0.973145, 171.966, 9.02783, 133.938, 7.02759, 110.692, 61.0328, 67.6134, 127.039, 141.725, 135.04, 221.613, 127.039, 267.641, 129.039, 307.725, 135.04, 369.558, 123.039, 324.776, 67.0334, 262.049, 15.0283)
+
+[node name="Body" type="Polygon2D" parent="Rock2"]
+position = Vector2(-300, 275)
+texture = ExtResource("2_6rkaa")
+polygon = PackedVector2Array(138.272, -8.02469, 119.136, 29.6296, 98.1482, 78.3951, 65.4321, 109.877, 51.2346, 143.21, 51.2346, 182.716, 123.457, 198.765, 225.926, 195.062, 343.21, 193.21, 431.482, 174.691, 375.309, 98.7654, 285.802, 21.6049, 226.543, -9.87654)
+uv = PackedVector2Array(138.272, -8.02469, 119.136, 29.6296, 98.1482, 78.3951, 65.4321, 109.877, 51.2346, 143.21, 51.2346, 182.716, 123.457, 198.765, 225.926, 195.062, 343.21, 193.21, 431.482, 174.691, 375.309, 98.7654, 285.802, 21.6049, 226.543, -9.87654)
+
+[node name="RockFrontArea" type="Area2D" parent="Rock2/Body"]
+position = Vector2(300, -275)
+script = ExtResource("5_2evq8")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Rock2/Body/RockFrontArea"]
+polygon = PackedVector2Array(-254.694, 380.037, -184.722, 378.037, 117.278, 378.037, 110.458, 176.017, -257.57, 174.017)
+
+[node name="RockBackArea" type="Area2D" parent="Rock2/Body"]
+position = Vector2(300, -275)
+script = ExtResource("4_r11ot")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Rock2/Body/RockBackArea"]
+polygon = PackedVector2Array(-188.694, 380.037, 117.25, 376.036, 122.954, 498.048, -251.074, 496.048, -254.694, 380.037)
+
+[node name="RockCollisionArea" type="Area2D" parent="Rock2"]
+script = ExtResource("3_3v1l6")
+
+[node name="RockCollisionAreaPolygon" type="CollisionPolygon2D" parent="Rock2/RockCollisionArea"]
+position = Vector2(-300, 275)
+polygon = PackedVector2Array(215.826, -0.973145, 171.966, 9.02783, 133.938, 7.02759, 110.692, 61.0328, 67.6134, 127.039, 141.725, 135.04, 221.613, 127.039, 267.641, 129.039, 307.725, 135.04, 369.558, 123.039, 324.776, 67.0334, 262.049, 15.0283)
+
+[node name="Rock3" type="StaticBody2D" parent="."]
+z_index = 2
+position = Vector2(2078, 735)
+scale = Vector2(0.5, 0.5)
+skew = 0.0139626
+
+[node name="RockCollisionArea2" type="CollisionPolygon2D" parent="Rock3"]
+position = Vector2(-300, 275)
+polygon = PackedVector2Array(215.826, -0.973145, 171.966, 9.02783, 133.938, 7.02759, 110.692, 61.0328, 67.6134, 127.039, 141.725, 135.04, 221.613, 127.039, 267.641, 129.039, 307.725, 135.04, 369.558, 123.039, 324.776, 67.0334, 262.049, 15.0283)
+
+[node name="Body" type="Polygon2D" parent="Rock3"]
+position = Vector2(-300, 275)
+texture = ExtResource("2_6rkaa")
+polygon = PackedVector2Array(138.272, -8.02469, 119.136, 29.6296, 98.1482, 78.3951, 65.4321, 109.877, 51.2346, 143.21, 51.2346, 182.716, 123.457, 198.765, 225.926, 195.062, 343.21, 193.21, 431.482, 174.691, 375.309, 98.7654, 285.802, 21.6049, 226.543, -9.87654)
+uv = PackedVector2Array(138.272, -8.02469, 119.136, 29.6296, 98.1482, 78.3951, 65.4321, 109.877, 51.2346, 143.21, 51.2346, 182.716, 123.457, 198.765, 225.926, 195.062, 343.21, 193.21, 431.482, 174.691, 375.309, 98.7654, 285.802, 21.6049, 226.543, -9.87654)
+
+[node name="RockFrontArea" type="Area2D" parent="Rock3/Body"]
+position = Vector2(300, -275)
+script = ExtResource("5_2evq8")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Rock3/Body/RockFrontArea"]
+polygon = PackedVector2Array(-254.694, 380.037, -184.722, 378.037, 117.278, 378.037, 110.458, 176.017, -257.57, 174.017)
+
+[node name="RockBackArea" type="Area2D" parent="Rock3/Body"]
+position = Vector2(300, -275)
+script = ExtResource("4_r11ot")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Rock3/Body/RockBackArea"]
+polygon = PackedVector2Array(-188.694, 380.037, 117.25, 376.036, 122.954, 498.048, -251.074, 496.048, -254.694, 380.037)
+
+[node name="RockCollisionArea" type="Area2D" parent="Rock3"]
+script = ExtResource("3_3v1l6")
+
+[node name="RockCollisionAreaPolygon" type="CollisionPolygon2D" parent="Rock3/RockCollisionArea"]
+position = Vector2(-300, 275)
+polygon = PackedVector2Array(215.826, -0.973145, 171.966, 9.02783, 133.938, 7.02759, 110.692, 61.0328, 67.6134, 127.039, 141.725, 135.04, 221.613, 127.039, 267.641, 129.039, 307.725, 135.04, 369.558, 123.039, 324.776, 67.0334, 262.049, 15.0283)
+
+[node name="Rock4" type="StaticBody2D" parent="."]
+z_index = 2
+position = Vector2(2476, -39)
+scale = Vector2(0.5, 0.5)
+skew = 0.0139626
+
+[node name="RockCollisionArea2" type="CollisionPolygon2D" parent="Rock4"]
+position = Vector2(-300, 275)
+polygon = PackedVector2Array(215.826, -0.973145, 171.966, 9.02783, 133.938, 7.02759, 110.692, 61.0328, 67.6134, 127.039, 141.725, 135.04, 221.613, 127.039, 267.641, 129.039, 307.725, 135.04, 369.558, 123.039, 324.776, 67.0334, 262.049, 15.0283)
+
+[node name="Body" type="Polygon2D" parent="Rock4"]
+position = Vector2(-300, 275)
+texture = ExtResource("2_6rkaa")
+polygon = PackedVector2Array(138.272, -8.02469, 119.136, 29.6296, 98.1482, 78.3951, 65.4321, 109.877, 51.2346, 143.21, 51.2346, 182.716, 123.457, 198.765, 225.926, 195.062, 343.21, 193.21, 431.482, 174.691, 375.309, 98.7654, 285.802, 21.6049, 226.543, -9.87654)
+uv = PackedVector2Array(138.272, -8.02469, 119.136, 29.6296, 98.1482, 78.3951, 65.4321, 109.877, 51.2346, 143.21, 51.2346, 182.716, 123.457, 198.765, 225.926, 195.062, 343.21, 193.21, 431.482, 174.691, 375.309, 98.7654, 285.802, 21.6049, 226.543, -9.87654)
+
+[node name="RockFrontArea" type="Area2D" parent="Rock4/Body"]
+position = Vector2(300, -275)
+script = ExtResource("5_2evq8")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Rock4/Body/RockFrontArea"]
+polygon = PackedVector2Array(-254.694, 380.037, -184.722, 378.037, 117.278, 378.037, 110.458, 176.017, -257.57, 174.017)
+
+[node name="RockBackArea" type="Area2D" parent="Rock4/Body"]
+position = Vector2(300, -275)
+script = ExtResource("4_r11ot")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Rock4/Body/RockBackArea"]
+polygon = PackedVector2Array(-188.694, 380.037, 117.25, 376.036, 122.954, 498.048, -251.074, 496.048, -254.694, 380.037)
+
+[node name="RockCollisionArea" type="Area2D" parent="Rock4"]
+script = ExtResource("3_3v1l6")
+
+[node name="RockCollisionAreaPolygon" type="CollisionPolygon2D" parent="Rock4/RockCollisionArea"]
+position = Vector2(-300, 275)
+polygon = PackedVector2Array(215.826, -0.973145, 171.966, 9.02783, 133.938, 7.02759, 110.692, 61.0328, 67.6134, 127.039, 141.725, 135.04, 221.613, 127.039, 267.641, 129.039, 307.725, 135.04, 369.558, 123.039, 324.776, 67.0334, 262.049, 15.0283)
+
+[node name="Rock5" type="StaticBody2D" parent="."]
+z_index = 2
+position = Vector2(3373, 189)
+scale = Vector2(0.5, 0.5)
+skew = 0.0139626
+
+[node name="RockCollisionArea2" type="CollisionPolygon2D" parent="Rock5"]
+position = Vector2(-300, 275)
+polygon = PackedVector2Array(215.826, -0.973145, 171.966, 9.02783, 133.938, 7.02759, 110.692, 61.0328, 67.6134, 127.039, 141.725, 135.04, 221.613, 127.039, 267.641, 129.039, 307.725, 135.04, 369.558, 123.039, 324.776, 67.0334, 262.049, 15.0283)
+
+[node name="Body" type="Polygon2D" parent="Rock5"]
+position = Vector2(-300, 275)
+texture = ExtResource("2_6rkaa")
+polygon = PackedVector2Array(138.272, -8.02469, 119.136, 29.6296, 98.1482, 78.3951, 65.4321, 109.877, 51.2346, 143.21, 51.2346, 182.716, 123.457, 198.765, 225.926, 195.062, 343.21, 193.21, 431.482, 174.691, 375.309, 98.7654, 285.802, 21.6049, 226.543, -9.87654)
+uv = PackedVector2Array(138.272, -8.02469, 119.136, 29.6296, 98.1482, 78.3951, 65.4321, 109.877, 51.2346, 143.21, 51.2346, 182.716, 123.457, 198.765, 225.926, 195.062, 343.21, 193.21, 431.482, 174.691, 375.309, 98.7654, 285.802, 21.6049, 226.543, -9.87654)
+
+[node name="RockFrontArea" type="Area2D" parent="Rock5/Body"]
+position = Vector2(300, -275)
+script = ExtResource("5_2evq8")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Rock5/Body/RockFrontArea"]
+polygon = PackedVector2Array(-254.694, 380.037, -184.722, 378.037, 117.278, 378.037, 110.458, 176.017, -257.57, 174.017)
+
+[node name="RockBackArea" type="Area2D" parent="Rock5/Body"]
+position = Vector2(300, -275)
+script = ExtResource("4_r11ot")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Rock5/Body/RockBackArea"]
+polygon = PackedVector2Array(-188.694, 380.037, 117.25, 376.036, 122.954, 498.048, -251.074, 496.048, -254.694, 380.037)
+
+[node name="RockCollisionArea" type="Area2D" parent="Rock5"]
+script = ExtResource("3_3v1l6")
+
+[node name="RockCollisionAreaPolygon" type="CollisionPolygon2D" parent="Rock5/RockCollisionArea"]
+position = Vector2(-300, 275)
+polygon = PackedVector2Array(215.826, -0.973145, 171.966, 9.02783, 133.938, 7.02759, 110.692, 61.0328, 67.6134, 127.039, 141.725, 135.04, 221.613, 127.039, 267.641, 129.039, 307.725, 135.04, 369.558, 123.039, 324.776, 67.0334, 262.049, 15.0283)
+
+[node name="Rock6" type="StaticBody2D" parent="."]
+z_index = 2
+position = Vector2(4414, 722)
+scale = Vector2(0.5, 0.5)
+skew = 0.0139626
+
+[node name="RockCollisionArea2" type="CollisionPolygon2D" parent="Rock6"]
+position = Vector2(-300, 275)
+polygon = PackedVector2Array(215.826, -0.973145, 171.966, 9.02783, 133.938, 7.02759, 110.692, 61.0328, 67.6134, 127.039, 141.725, 135.04, 221.613, 127.039, 267.641, 129.039, 307.725, 135.04, 369.558, 123.039, 324.776, 67.0334, 262.049, 15.0283)
+
+[node name="Body" type="Polygon2D" parent="Rock6"]
+position = Vector2(-300, 275)
+texture = ExtResource("2_6rkaa")
+polygon = PackedVector2Array(138.272, -8.02469, 119.136, 29.6296, 98.1482, 78.3951, 65.4321, 109.877, 51.2346, 143.21, 51.2346, 182.716, 123.457, 198.765, 225.926, 195.062, 343.21, 193.21, 431.482, 174.691, 375.309, 98.7654, 285.802, 21.6049, 226.543, -9.87654)
+uv = PackedVector2Array(138.272, -8.02469, 119.136, 29.6296, 98.1482, 78.3951, 65.4321, 109.877, 51.2346, 143.21, 51.2346, 182.716, 123.457, 198.765, 225.926, 195.062, 343.21, 193.21, 431.482, 174.691, 375.309, 98.7654, 285.802, 21.6049, 226.543, -9.87654)
+
+[node name="RockFrontArea" type="Area2D" parent="Rock6/Body"]
+position = Vector2(300, -275)
+script = ExtResource("5_2evq8")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Rock6/Body/RockFrontArea"]
+polygon = PackedVector2Array(-254.694, 380.037, -184.722, 378.037, 117.278, 378.037, 110.458, 176.017, -257.57, 174.017)
+
+[node name="RockBackArea" type="Area2D" parent="Rock6/Body"]
+position = Vector2(300, -275)
+script = ExtResource("4_r11ot")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Rock6/Body/RockBackArea"]
+polygon = PackedVector2Array(-188.694, 380.037, 117.25, 376.036, 122.954, 498.048, -251.074, 496.048, -254.694, 380.037)
+
+[node name="RockCollisionArea" type="Area2D" parent="Rock6"]
+script = ExtResource("3_3v1l6")
+
+[node name="RockCollisionAreaPolygon" type="CollisionPolygon2D" parent="Rock6/RockCollisionArea"]
+position = Vector2(-300, 275)
+polygon = PackedVector2Array(215.826, -0.973145, 171.966, 9.02783, 133.938, 7.02759, 110.692, 61.0328, 67.6134, 127.039, 141.725, 135.04, 221.613, 127.039, 267.641, 129.039, 307.725, 135.04, 369.558, 123.039, 324.776, 67.0334, 262.049, 15.0283)
+
+[node name="Rock7" type="StaticBody2D" parent="."]
+z_index = 2
+position = Vector2(4384, 141)
+scale = Vector2(0.5, 0.5)
+skew = 0.0139626
+
+[node name="RockCollisionArea2" type="CollisionPolygon2D" parent="Rock7"]
+position = Vector2(-300, 275)
+polygon = PackedVector2Array(215.826, -0.973145, 171.966, 9.02783, 133.938, 7.02759, 110.692, 61.0328, 67.6134, 127.039, 141.725, 135.04, 221.613, 127.039, 267.641, 129.039, 307.725, 135.04, 369.558, 123.039, 324.776, 67.0334, 262.049, 15.0283)
+
+[node name="Body" type="Polygon2D" parent="Rock7"]
+position = Vector2(-300, 275)
+texture = ExtResource("2_6rkaa")
+polygon = PackedVector2Array(138.272, -8.02469, 119.136, 29.6296, 98.1482, 78.3951, 65.4321, 109.877, 51.2346, 143.21, 51.2346, 182.716, 123.457, 198.765, 225.926, 195.062, 343.21, 193.21, 431.482, 174.691, 375.309, 98.7654, 285.802, 21.6049, 226.543, -9.87654)
+uv = PackedVector2Array(138.272, -8.02469, 119.136, 29.6296, 98.1482, 78.3951, 65.4321, 109.877, 51.2346, 143.21, 51.2346, 182.716, 123.457, 198.765, 225.926, 195.062, 343.21, 193.21, 431.482, 174.691, 375.309, 98.7654, 285.802, 21.6049, 226.543, -9.87654)
+
+[node name="RockFrontArea" type="Area2D" parent="Rock7/Body"]
+position = Vector2(300, -275)
+script = ExtResource("5_2evq8")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Rock7/Body/RockFrontArea"]
+polygon = PackedVector2Array(-254.694, 380.037, -184.722, 378.037, 117.278, 378.037, 110.458, 176.017, -257.57, 174.017)
+
+[node name="RockBackArea" type="Area2D" parent="Rock7/Body"]
+position = Vector2(300, -275)
+script = ExtResource("4_r11ot")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Rock7/Body/RockBackArea"]
+polygon = PackedVector2Array(-188.694, 380.037, 117.25, 376.036, 122.954, 498.048, -251.074, 496.048, -254.694, 380.037)
+
+[node name="RockCollisionArea" type="Area2D" parent="Rock7"]
+script = ExtResource("3_3v1l6")
+
+[node name="RockCollisionAreaPolygon" type="CollisionPolygon2D" parent="Rock7/RockCollisionArea"]
+position = Vector2(-300, 275)
+polygon = PackedVector2Array(215.826, -0.973145, 171.966, 9.02783, 133.938, 7.02759, 110.692, 61.0328, 67.6134, 127.039, 141.725, 135.04, 221.613, 127.039, 267.641, 129.039, 307.725, 135.04, 369.558, 123.039, 324.776, 67.0334, 262.049, 15.0283)
+
+[node name="Rock8" type="StaticBody2D" parent="."]
+z_index = 2
+position = Vector2(5943, 386)
+scale = Vector2(0.5, 0.5)
+skew = 0.0139626
+
+[node name="RockCollisionArea2" type="CollisionPolygon2D" parent="Rock8"]
+position = Vector2(-300, 275)
+polygon = PackedVector2Array(215.826, -0.973145, 171.966, 9.02783, 133.938, 7.02759, 110.692, 61.0328, 67.6134, 127.039, 141.725, 135.04, 221.613, 127.039, 267.641, 129.039, 307.725, 135.04, 369.558, 123.039, 324.776, 67.0334, 262.049, 15.0283)
+
+[node name="Body" type="Polygon2D" parent="Rock8"]
+position = Vector2(-300, 275)
+texture = ExtResource("2_6rkaa")
+polygon = PackedVector2Array(138.272, -8.02469, 119.136, 29.6296, 98.1482, 78.3951, 65.4321, 109.877, 51.2346, 143.21, 51.2346, 182.716, 123.457, 198.765, 225.926, 195.062, 343.21, 193.21, 431.482, 174.691, 375.309, 98.7654, 285.802, 21.6049, 226.543, -9.87654)
+uv = PackedVector2Array(138.272, -8.02469, 119.136, 29.6296, 98.1482, 78.3951, 65.4321, 109.877, 51.2346, 143.21, 51.2346, 182.716, 123.457, 198.765, 225.926, 195.062, 343.21, 193.21, 431.482, 174.691, 375.309, 98.7654, 285.802, 21.6049, 226.543, -9.87654)
+
+[node name="RockFrontArea" type="Area2D" parent="Rock8/Body"]
+position = Vector2(300, -275)
+script = ExtResource("5_2evq8")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Rock8/Body/RockFrontArea"]
+polygon = PackedVector2Array(-254.694, 380.037, -184.722, 378.037, 117.278, 378.037, 110.458, 176.017, -257.57, 174.017)
+
+[node name="RockBackArea" type="Area2D" parent="Rock8/Body"]
+position = Vector2(300, -275)
+script = ExtResource("4_r11ot")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Rock8/Body/RockBackArea"]
+polygon = PackedVector2Array(-188.694, 380.037, 117.25, 376.036, 122.954, 498.048, -251.074, 496.048, -254.694, 380.037)
+
+[node name="RockCollisionArea" type="Area2D" parent="Rock8"]
+script = ExtResource("3_3v1l6")
+
+[node name="RockCollisionAreaPolygon" type="CollisionPolygon2D" parent="Rock8/RockCollisionArea"]
+position = Vector2(-300, 275)
+polygon = PackedVector2Array(215.826, -0.973145, 171.966, 9.02783, 133.938, 7.02759, 110.692, 61.0328, 67.6134, 127.039, 141.725, 135.04, 221.613, 127.039, 267.641, 129.039, 307.725, 135.04, 369.558, 123.039, 324.776, 67.0334, 262.049, 15.0283)
+
+[node name="Rock9" type="StaticBody2D" parent="."]
+z_index = 2
+position = Vector2(6904, 382)
+scale = Vector2(0.5, 0.5)
+skew = 0.0139626
+
+[node name="RockCollisionArea2" type="CollisionPolygon2D" parent="Rock9"]
+position = Vector2(-300, 275)
+polygon = PackedVector2Array(215.826, -0.973145, 171.966, 9.02783, 133.938, 7.02759, 110.692, 61.0328, 67.6134, 127.039, 141.725, 135.04, 221.613, 127.039, 267.641, 129.039, 307.725, 135.04, 369.558, 123.039, 324.776, 67.0334, 262.049, 15.0283)
+
+[node name="Body" type="Polygon2D" parent="Rock9"]
+position = Vector2(-300, 275)
+texture = ExtResource("2_6rkaa")
+polygon = PackedVector2Array(138.272, -8.02469, 119.136, 29.6296, 98.1482, 78.3951, 65.4321, 109.877, 51.2346, 143.21, 51.2346, 182.716, 123.457, 198.765, 225.926, 195.062, 343.21, 193.21, 431.482, 174.691, 375.309, 98.7654, 285.802, 21.6049, 226.543, -9.87654)
+uv = PackedVector2Array(138.272, -8.02469, 119.136, 29.6296, 98.1482, 78.3951, 65.4321, 109.877, 51.2346, 143.21, 51.2346, 182.716, 123.457, 198.765, 225.926, 195.062, 343.21, 193.21, 431.482, 174.691, 375.309, 98.7654, 285.802, 21.6049, 226.543, -9.87654)
+
+[node name="RockFrontArea" type="Area2D" parent="Rock9/Body"]
+position = Vector2(300, -275)
+script = ExtResource("5_2evq8")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Rock9/Body/RockFrontArea"]
+polygon = PackedVector2Array(-254.694, 380.037, -184.722, 378.037, 117.278, 378.037, 110.458, 176.017, -257.57, 174.017)
+
+[node name="RockBackArea" type="Area2D" parent="Rock9/Body"]
+position = Vector2(300, -275)
+script = ExtResource("4_r11ot")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Rock9/Body/RockBackArea"]
+polygon = PackedVector2Array(-188.694, 380.037, 117.25, 376.036, 122.954, 498.048, -251.074, 496.048, -254.694, 380.037)
+
+[node name="RockCollisionArea" type="Area2D" parent="Rock9"]
+script = ExtResource("3_3v1l6")
+
+[node name="RockCollisionAreaPolygon" type="CollisionPolygon2D" parent="Rock9/RockCollisionArea"]
+position = Vector2(-300, 275)
+polygon = PackedVector2Array(215.826, -0.973145, 171.966, 9.02783, 133.938, 7.02759, 110.692, 61.0328, 67.6134, 127.039, 141.725, 135.04, 221.613, 127.039, 267.641, 129.039, 307.725, 135.04, 369.558, 123.039, 324.776, 67.0334, 262.049, 15.0283)
+
+[node name="Borders" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape" type="CollisionShape2D" parent="Borders"]
+shape = SubResource("SegmentShape2D_um8lm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders"]
+shape = SubResource("SegmentShape2D_m0xkj")
