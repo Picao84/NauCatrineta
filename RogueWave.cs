@@ -27,7 +27,7 @@ public partial class RogueWave : Path2D
         {
             path.Progress = (float)(path.Progress + delta * 150);
             var cameraPosition = camera.GlobalPosition.X;
-            if (path.GlobalPosition.X + wavePolygon.Polygon.Max(x => x.X) < cameraPosition)
+            if (path.GlobalPosition.X + wavePolygon.Polygon.Max(x => x.X) < cameraPosition || path.ProgressRatio == 1.0f)
             {
                 QueueFree();
             }
@@ -45,5 +45,10 @@ public partial class RogueWave : Path2D
     private void Player_AnimationFinished(StringName animName)
     {
         QueueFree();
+    }
+
+    public void GameOver()
+    {
+        shouldUpdatePath = false;
     }
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b2tgu2ppv0oqw"]
+[gd_scene load_steps=12 format=3 uid="uid://b2tgu2ppv0oqw"]
 
 [ext_resource type="Script" path="res://Main.cs" id="1_tekut"]
 [ext_resource type="Texture2D" uid="uid://d26ypofkvj3ne" path="res://Assets/rock1.png" id="2_6rkaa"]
@@ -13,6 +13,18 @@ b = Vector2(9600, 300)
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_m0xkj"]
 a = Vector2(0, 1080)
 b = Vector2(9600, 1080)
+
+[sub_resource type="LabelSettings" id="LabelSettings_rh0bp"]
+font_size = 23
+
+[sub_resource type="LabelSettings" id="LabelSettings_pbod5"]
+font_size = 40
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qwycy"]
+bg_color = Color(0.737255, 0.576471, 0.109804, 1)
+
+[sub_resource type="Theme" id="Theme_nvgj2"]
+/styles/test = SubResource("StyleBoxFlat_qwycy")
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_tekut")
@@ -367,3 +379,63 @@ shape = SubResource("SegmentShape2D_um8lm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Borders"]
 shape = SubResource("SegmentShape2D_m0xkj")
+
+[node name="Game Over Popup" type="PopupPanel" parent="."]
+initial_position = 1
+size = Vector2i(500, 500)
+
+[node name="Node2D" type="Node2D" parent="Game Over Popup"]
+
+[node name="Label2" type="Label" parent="Game Over Popup/Node2D"]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 496.0
+offset_bottom = 496.0
+text = "Lost too many sails!"
+label_settings = SubResource("LabelSettings_rh0bp")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="Game Over Popup/Node2D"]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 496.0
+offset_bottom = 496.0
+text = "GAME OVER"
+label_settings = SubResource("LabelSettings_pbod5")
+horizontal_alignment = 1
+justification_flags = 0
+
+[node name="Button" type="Button" parent="Game Over Popup/Node2D"]
+offset_left = 4.0
+offset_top = 400.0
+offset_right = 496.0
+offset_bottom = 500.0
+theme = SubResource("Theme_nvgj2")
+text = "Try Again!"
+
+[node name="Game Won Popup" type="PopupPanel" parent="."]
+initial_position = 1
+size = Vector2i(500, 500)
+
+[node name="Node2D" type="Node2D" parent="Game Won Popup"]
+
+[node name="Label" type="Label" parent="Game Won Popup/Node2D"]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 504.0
+offset_bottom = 496.0
+text = "ADAMASTOR WAS DEFEATED! HURRAY!"
+label_settings = SubResource("LabelSettings_pbod5")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+justification_flags = 0
+
+[node name="Button" type="Button" parent="Game Won Popup/Node2D"]
+offset_left = 4.0
+offset_top = 400.0
+offset_right = 496.0
+offset_bottom = 500.0
+theme = SubResource("Theme_nvgj2")
+text = "Play Again!"

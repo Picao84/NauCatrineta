@@ -2,14 +2,15 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 public partial class Adamastor : Node2D
 {
-	// Called when the node enters the scene tree for the first time.
+    // Called when the node enters the scene tree for the first time.
 
-	AnimationPlayer player;
-	string[] animationList = new string[0];
+    AnimationPlayer player;
+    string[] animationList = new string[0];
 
     AdamastorWaveCollision farleftCollisionArea;
     AdamastorWaveCollision leftCollisionArea;
@@ -17,6 +18,30 @@ public partial class Adamastor : Node2D
     AdamastorWaveCollision farrightCollisionArea;
     AdamastorWaveCollision rightCollisionArea;
     AdamastorWaveCollision rightCenterCollisionArea;
+
+    const int MAX_LIFE = 10;
+
+    Polygon2D LeftEye;
+    Polygon2D RightEye;
+
+    int Life = MAX_LIFE;
+
+    Dictionary<int, Color> HpColors = new Dictionary<int, Color>()
+    {
+        { 10, Colors.DarkGreen },
+        { 9, Colors.Green },
+        { 8, Colors.LightGreen },
+        { 7, Colors.GreenYellow },
+        { 6, Colors.YellowGreen },
+        { 5, Colors.Yellow },
+        { 4, Colors.Orange },
+        { 3, Colors.DarkOrange },
+        { 2, Colors.OrangeRed },
+        { 1, Colors.DarkRed },
+        { 0, Colors.Black },
+
+
+    };
 
     public int AnimationCount
 	{
@@ -32,9 +57,13 @@ public partial class Adamastor : Node2D
 		farleftCollisionArea = GetParent().GetNode<AdamastorWaveCollision>("Wave Far Left Collision");
         leftCollisionArea = GetParent().GetNode<AdamastorWaveCollision>("Wave Left Collision");
         leftCenterCollisionArea = GetParent().GetNode<AdamastorWaveCollision>("Wave Left Center Collision");
-        farrightCollisionArea = GetParent().GetNode<AdamastorWaveCollision>("Wave Far Right Collision");
         rightCollisionArea = GetParent().GetNode<AdamastorWaveCollision>("Wave Right Collision");
         rightCenterCollisionArea = GetParent().GetNode<AdamastorWaveCollision>("Wave Right Center Collision");
+
+        LeftEye = GetNode<Polygon2D>("LeftEye");
+        LeftEye.Color = Colors.Green;
+        RightEye = GetNode<Polygon2D>("RightEye");
+        RightEye.Color = Colors.Green;
     }
 
 	private Vector2 GetLowestX(CollisionPolygon2D collisionPolygon)
@@ -73,26 +102,18 @@ public partial class Adamastor : Node2D
 
     private void Player_AnimationFinished(StringName animName)
     {
-		farleftCollisionArea.registerAreas = true;
-        leftCollisionArea.registerAreas = true;
-        leftCenterCollisionArea.registerAreas = true;
-        farrightCollisionArea.registerAreas = true;
-        rightCollisionArea.registerAreas = true;
-        rightCenterCollisionArea.registerAreas = true;
 
-        //      if (animName.ToString().Contains("Left"))
-        //{
-        //          var transformedpoositionY = lowerleft.GetGlobalTransform().BasisXform(lowerleft.Position).Y;
-        //          ((Main)GetParent().GetParent()).CreatWaveAt(new Vector2(((Bone2D)lowerleft.GetParent()).GlobalPosition.X + Math.Abs(GetLowestX(lowerleft).X), ((Bone2D)lowerleft.GetParent()).GlobalPosition.Y + Math.Abs(GetHighestY(lowerleft).Y + transformedpoositionY)));
-        //}
-        //else
-        //{
-        //	var bone = ((Bone2D)lowerright.GetParent()).GlobalPosition.Y;
-        //          var transformedpoositionX = lowerright.GetGlobalTransform().BasisXform(lowerright.Position).X;
-        //          var transformedpoositionY = lowerright.GetGlobalTransform().BasisXform(lowerright.Position).Y;
-        //          ((Main)GetParent().GetParent()).CreatWaveAt(new Vector2(((Bone2D)lowerright.GetParent()).GlobalPosition.X + Math.Abs(GetLowestX(lowerright).X) + transformedpoositionX, bone + Math.Abs(GetHighestY(lowerright).Y + transformedpoositionY)))s;
-
-        //      }
+        if (animName.ToString().Contains("Left"))
+        {
+            farleftCollisionArea.registerAreas = true;
+            leftCollisionArea.registerAreas = true;
+            leftCenterCollisionArea.registerAreas = true;
+        }
+        else
+        {
+            rightCollisionArea.registerAreas = true;
+            rightCenterCollisionArea.registerAreas = true;
+        }
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -100,8 +121,27 @@ public partial class Adamastor : Node2D
 	{
 	}
 
+    public void Hit()
+    {
+        Life--;
+        LeftEye.Color = HpColors[Life];
+        RightEye.Color = HpColors[Life];
+
+        if(Life <= 0)
+        {
+            ((Main)GetParent().GetParent()).GameWon();
+        }
+
+    }
+
 	public void PlayAnimation(int index)
 	{
-		player.Play("Create Wave Far Right");
+        farleftCollisionArea.registerAreas = false;
+        leftCollisionArea.registerAreas = false;
+        leftCenterCollisionArea.registerAreas = false;
+        rightCollisionArea.registerAreas = false;
+        rightCenterCollisionArea.registerAreas = false;
+
+        player.Play(animationList[index]);
 	}
 }

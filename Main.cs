@@ -11,16 +11,19 @@ public partial class Main : Node2D
     Camera2D camera;
     PackedScene AdamastorScene;
     Adamastor Adamastor;
+    Canon Cannon;
+    PopupPanel GameOverPopup;
+    PopupPanel GameWonPopup;
 
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
+    // Called when the node enters the scene tree for the first time.
+    public override void _Ready()
 	{
 		waveTimer.WaitTime = 2;
         waveTimer.Timeout += WaveTimer_Timeout;
         AddChild(waveTimer);
         waveTimer.Start();
 
-        adamastorTimer.WaitTime = 5;
+        adamastorTimer.WaitTime = 6;
         adamastorTimer.Timeout += Adamastor_Timeout;
         AddChild(adamastorTimer);
 
@@ -29,6 +32,11 @@ public partial class Main : Node2D
         AdamastorScene = (PackedScene)ResourceLoader.Load("res://Adamastor.tscn");
         AddChild(Boat.Instantiate());
         AddChild(AdamastorScene.Instantiate());
+
+        GameOverPopup = GetNode<PopupPanel>("Game Over Popup");
+        GameWonPopup = GetNode<PopupPanel>("Game Won Popup");
+        GameOverPopup.GetNode<Button>("Node2D/Button").Pressed += TryAgainPressed;
+        GameWonPopup.GetNode<Button>("Node2D/Button").Pressed += TryAgainPressed;
 
         Adamastor = GetNode<Adamastor>("AdamastorRoot/Adamastor");
 
@@ -40,6 +48,12 @@ public partial class Main : Node2D
         var randomY = new Random().Next(0, (int)(camera.GetViewportRect().End.Y - newWave.GetNode<Polygon2D>("PathFollow2D/Wave/Body").Polygon.Max(x => x.Y)));
         newWave.GlobalPosition = new Vector2(camera.GlobalPosition.X + 500, randomY);
         AddChild(newWave);
+    }
+
+    private void TryAgainPressed()
+    {
+        GameOverPopup.Hide();
+        GetTree().ReloadCurrentScene();
     }
 
     private void Adamastor_Timeout()
@@ -62,6 +76,40 @@ public partial class Main : Node2D
     public override void _Process(double delta)
 	{
        
+    }
+
+    public void GameWon()
+    {
+        adamastorTimer.Stop();
+        waveTimer.Stop();
+        var children = GetChildren();
+
+        foreach (var child in children)
+        {
+            if (child is RogueWave wave)
+            {
+                wave.GameOver();
+            }
+        }
+
+        GameWonPopup.Show();
+    }
+
+    public void GameOver()
+    {
+        adamastorTimer.Stop();
+        waveTimer.Stop();
+        var children = GetChildren();
+
+        foreach (var child in children)
+        {
+            if (child is RogueWave wave)
+            {
+                wave.GameOver();
+            }
+        }
+
+        GameOverPopup.Show();
     }
 
     public void ArrivedAtEnd()

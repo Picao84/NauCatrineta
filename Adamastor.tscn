@@ -1,8 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://dalnjxoeoonft"]
+[gd_scene load_steps=13 format=3 uid="uid://dalnjxoeoonft"]
 
 [ext_resource type="Texture2D" uid="uid://bi3wsb4oywei2" path="res://Assets/adamastor.png" id="1_74twl"]
 [ext_resource type="Script" path="res://Adamastor.cs" id="1_eifod"]
 [ext_resource type="Script" path="res://AdamastorWaveCollision.cs" id="3_5ow3p"]
+[ext_resource type="Script" path="res://Heart.cs" id="3_m0786"]
+[ext_resource type="Material" uid="uid://nbgdgn0t7hgv" path="res://waterMaterialExplosion.tres" id="4_bhsvx"]
+[ext_resource type="Material" uid="uid://6y72f3rbpjg8" path="res://waterMaterial.tres" id="4_dpt3e"]
 
 [sub_resource type="Animation" id="Animation_q15xo"]
 resource_name = "Create Wave Far Left"
@@ -29,33 +32,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0.0, 0.698132]
-}
-
-[sub_resource type="Animation" id="Animation_j1fvr"]
-resource_name = "Create Wave Far Right"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Adamastor Skeleton/Hip/Chest/TopRightArm:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.1, 0.4, 0.9, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [0.0, -0.872665, -0.872665, 0.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Adamastor Skeleton/Hip/Chest/TopRightArm/BottomRightArm:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.1, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, -0.698132]
 }
 
 [sub_resource type="Animation" id="Animation_bhoin"]
@@ -124,7 +100,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0.1, 0.4, 0.9, 1),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [0.0, -0.872665, -0.872665, 0.0]
+"values": [0.0, -0.698132, -0.698132, 0.0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -136,7 +112,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0.1, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.0, -0.174533]
+"values": [0.0, -0.349066]
 }
 
 [sub_resource type="Animation" id="Animation_7esjr"]
@@ -169,7 +145,6 @@ tracks/1/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_v5np7"]
 _data = {
 "Create Wave Far Left": SubResource("Animation_q15xo"),
-"Create Wave Far Right": SubResource("Animation_j1fvr"),
 "Create Wave Left": SubResource("Animation_bhoin"),
 "Create Wave Left Centre": SubResource("Animation_r4aqi"),
 "Create Wave Right": SubResource("Animation_duhm5"),
@@ -269,6 +244,12 @@ polygon = PackedVector2Array(2036.9, 1264.29, 1951.19, 1271.43, 1925, 1370.24, 1
 uv = PackedVector2Array(2036.9, 1264.29, 1951.19, 1271.43, 1925, 1370.24, 1858.33, 1394.05, 1859.52, 1521.43, 1790.48, 1614.29, 1721.43, 1630.95, 1717.86, 1675, 1644.05, 1707.14, 1601.19, 1786.9, 1614.29, 1855.95, 1640.48, 1946.43, 1677.38, 2011.9, 1736.9, 2054.76, 1795.24, 2036.9, 1898.81, 1933.33, 1939.29, 1933.33, 1966.67, 1882.14, 2016.67, 1869.05, 2017.86, 1783.33, 2048.81, 1698.81, 2114.29, 1689.29, 2117.86, 1607.14, 2205.95, 1546.43, 2228.57, 1427.38, 2221.43, 1321.43, 2172.62, 1305.95, 2186.9, 1244.05, 2134.52, 1233.33, 2111.9, 1250, 2077.38, 1205.95)
 bones = ["Hip", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Hip/Chest", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Hip/Chest/Head", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Hip/Chest/TopLeftArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Hip/Chest/TopLeftArm/BottomLeftArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Hip/Chest/TopRightArm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Hip/Chest/TopRightArm/BottomRightArm", PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)]
 
+[node name="LeftEye" type="Polygon2D" parent="Adamastor"]
+z_index = 2
+position = Vector2(-262, -29)
+scale = Vector2(1.16667, 1.14286)
+polygon = PackedVector2Array(1573, 196, 1572.14, 198, 1572.86, 203.875, 1574.57, 208.25, 1576.29, 210, 1578, 210, 1578, 207, 1577, 202, 1575, 199)
+
 [node name="Adamastor Skeleton" type="Skeleton2D" parent="Adamastor"]
 
 [node name="Hip" type="Bone2D" parent="Adamastor/Adamastor Skeleton"]
@@ -285,11 +266,13 @@ rest = Transform2D(1, 0, 0, 1, 26, -98)
 
 [node name="TopLeftArm" type="Bone2D" parent="Adamastor/Adamastor Skeleton/Hip/Chest"]
 position = Vector2(-153, -95)
-rotation = 0.349066
+rotation = 0.49451
 rest = Transform2D(1, 0, 0, 1, -153, -95)
 
 [node name="BottomLeftArm" type="Bone2D" parent="Adamastor/Adamastor Skeleton/Hip/Chest/TopLeftArm"]
 position = Vector2(-142, 132)
+rotation = 0.0775702
+scale = Vector2(1, 1)
 rest = Transform2D(1, 0, 0, 1, -142, 132)
 
 [node name="BottomLeftArm" type="Area2D" parent="Adamastor/Adamastor Skeleton/Hip/Chest/TopLeftArm/BottomLeftArm"]
@@ -301,11 +284,13 @@ polygon = PackedVector2Array(1150, 1105.95, 1134.52, 1142.86, 1045.24, 1146.43, 
 
 [node name="TopRightArm" type="Bone2D" parent="Adamastor/Adamastor Skeleton/Hip/Chest"]
 position = Vector2(216, -20)
+scale = Vector2(1, 1)
 rest = Transform2D(1, 0, 0, 1, 216, -20)
 
 [node name="BottomRightArm" type="Bone2D" parent="Adamastor/Adamastor Skeleton/Hip/Chest/TopRightArm"]
 position = Vector2(-10, 230)
-scale = Vector2(1, 1)
+rotation = -0.349066
+scale = Vector2(0.999999, 0.999999)
 rest = Transform2D(1, 0, 0, 1, -10, 230)
 
 [node name="BottomRightArm" type="Area2D" parent="Adamastor/Adamastor Skeleton/Hip/Chest/TopRightArm/BottomRightArm"]
@@ -321,6 +306,22 @@ libraries = {
 "": SubResource("AnimationLibrary_v5np7")
 }
 
+[node name="RightEye" type="Polygon2D" parent="Adamastor"]
+z_index = 2
+polygon = PackedVector2Array(1632, 207, 1629, 209, 1628, 209, 1625, 210, 1621, 210, 1618, 210, 1619, 214, 1620, 218, 1621, 220, 1623, 221, 1626, 221, 1632, 218, 1638, 214, 1640, 211, 1637, 209, 1634, 207)
+
+[node name="Heart" type="StaticBody2D" parent="Adamastor"]
+position = Vector2(1502, 501)
+script = ExtResource("3_m0786")
+
+[node name="Polygon2D2" type="CollisionPolygon2D" parent="Adamastor/Heart"]
+polygon = PackedVector2Array(-8, -24, 0, -16, 32, -16, 24, 16, -8, 32, -24, 8, -24, -16)
+
+[node name="HeartPolygon" type="Polygon2D" parent="Adamastor/Heart"]
+z_index = 2
+color = Color(1, 0.0784314, 0.0784314, 1)
+polygon = PackedVector2Array(-8, -24, 0, -16, 32, -16, 24, 16, -8, 32, -24, 8, -24, -16)
+
 [node name="Wave Left Center Collision" type="Area2D" parent="."]
 position = Vector2(8656, 776)
 script = ExtResource("3_5ow3p")
@@ -329,13 +330,27 @@ script = ExtResource("3_5ow3p")
 position = Vector2(-1224, -872)
 polygon = PackedVector2Array(1246, 805, 1246, 837, 1342, 837, 1342, 797)
 
+[node name="Explosion" type="GPUParticles2D" parent="Wave Left Center Collision"]
+rotation = 3.14159
+emitting = false
+amount = 5000
+process_material = ExtResource("4_dpt3e")
+one_shot = true
+
 [node name="Wave Far Left Collision" type="Area2D" parent="."]
 position = Vector2(8336, 712)
 script = ExtResource("3_5ow3p")
 
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Wave Far Left Collision"]
-position = Vector2(-1104, -768)
+position = Vector2(-1120, -768)
 polygon = PackedVector2Array(982, 717, 974, 757, 1032, 760, 1024, 720)
+
+[node name="Explosion" type="GPUParticles2D" parent="Wave Far Left Collision"]
+rotation = 3.14159
+emitting = false
+amount = 5000
+process_material = ExtResource("4_bhsvx")
+one_shot = true
 
 [node name="Wave Left Collision" type="Area2D" parent="."]
 position = Vector2(8520, 800)
@@ -345,21 +360,27 @@ script = ExtResource("3_5ow3p")
 position = Vector2(-8520, -800)
 polygon = PackedVector2Array(8400, 800, 8400, 840, 8464, 840, 8464, 800)
 
-[node name="Wave Far Right Collision" type="Area2D" parent="."]
-position = Vector2(9008, 928)
-script = ExtResource("3_5ow3p")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Wave Far Right Collision"]
-position = Vector2(96, 16)
-polygon = PackedVector2Array(56, 24, 56, 72, 120, 72, 120, 24)
+[node name="Explosion" type="GPUParticles2D" parent="Wave Left Collision"]
+rotation = 3.14159
+emitting = false
+amount = 5000
+process_material = ExtResource("4_dpt3e")
+one_shot = true
 
 [node name="Wave Right Collision" type="Area2D" parent="."]
 position = Vector2(8832, 840)
 script = ExtResource("3_5ow3p")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Wave Right Collision"]
-position = Vector2(80, 128)
+position = Vector2(168, 139)
 polygon = PackedVector2Array(24, 0, 64, 0, 72, 40, 16, 40)
+
+[node name="Explosion" type="GPUParticles2D" parent="Wave Right Collision"]
+rotation = 3.14159
+emitting = false
+amount = 5000
+process_material = ExtResource("4_dpt3e")
+one_shot = true
 
 [node name="Wave Right Center Collision" type="Area2D" parent="."]
 position = Vector2(8760, 792)
@@ -367,3 +388,10 @@ script = ExtResource("3_5ow3p")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Wave Right Center Collision"]
 polygon = PackedVector2Array(16, -32, 16, 24, -40, 16, -32, -32)
+
+[node name="Explosion" type="GPUParticles2D" parent="Wave Right Center Collision"]
+rotation = 3.14159
+emitting = false
+amount = 5000
+process_material = ExtResource("4_dpt3e")
+one_shot = true

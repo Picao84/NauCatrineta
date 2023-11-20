@@ -1,0 +1,55 @@
+[gd_scene load_steps=5 format=3 uid="uid://c1cawmqvi4qve"]
+
+[ext_resource type="Script" path="res://Canon.cs" id="1_xyyks"]
+[ext_resource type="Script" path="res://CanonArea.cs" id="2_10xy5"]
+
+[sub_resource type="Curve2D" id="Curve2D_y4d0s"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 444, 532, 0, 0, 0, 0, 512, 438.667, 0, 0, 0, 0, 744, 172, 0, 0, 0, 0, 1033.33, 6.66667, 0, 0, 0, 0, 1321.33, -26.6667, 0, 0, 0, 0, 1549.33, 36)
+}
+point_count = 6
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4y31d"]
+emission_shape = 1
+emission_sphere_radius = 50.0
+particle_flag_disable_z = true
+spread = 100.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 50.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+color = Color(0.329412, 0.329412, 0.329412, 1)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Canon" type="Path2D" parent="."]
+z_index = 2
+position = Vector2(349, 2)
+scale = Vector2(0.75, 0.75)
+curve = SubResource("Curve2D_y4d0s")
+script = ExtResource("1_xyyks")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Canon"]
+position = Vector2(444, 532)
+rotation = -0.941151
+
+[node name="CanonArea" type="Area2D" parent="Canon/PathFollow2D"]
+script = ExtResource("2_10xy5")
+
+[node name="Polygon2D" type="Polygon2D" parent="Canon/PathFollow2D/CanonArea"]
+position = Vector2(-434.488, -529.716)
+scale = Vector2(1, 1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(428, 512, 413.333, 525.333, 416, 537.333, 429.333, 544, 444, 542.667, 449.333, 530.667, 449.333, 516, 441.333, 509.333)
+
+[node name="CollisionPolygon" type="CollisionPolygon2D" parent="Canon/PathFollow2D/CanonArea"]
+position = Vector2(-434.488, -529.716)
+scale = Vector2(1, 1)
+polygon = PackedVector2Array(428, 512, 413.333, 525.333, 416, 537.333, 429.333, 544, 444, 542.667, 449.333, 530.667, 449.333, 516, 441.333, 509.333)
+
+[node name="Crash Particles" type="GPUParticles2D" parent="Canon/PathFollow2D/CanonArea"]
+emitting = false
+amount = 2000
+process_material = SubResource("ParticleProcessMaterial_4y31d")
+one_shot = true

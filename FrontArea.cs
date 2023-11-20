@@ -5,8 +5,10 @@ using System.Linq;
 public partial class FrontArea : Area2D
 {
 	static StringName BoatBackArea = "BackArea";
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
+    static StringName RockBackArea = "RockBackArea";
+    static StringName WaveBackArea = "WaveBackArea";
+    // Called when the node enters the scene tree for the first time.
+    public override void _Ready()
 	{
 	}
 
@@ -19,5 +21,15 @@ public partial class FrontArea : Area2D
 		{
 			GetParent<Polygon2D>().ZIndex = 0;
 		}
+
+        //if (this.Name == "WaveFrontArea" && overlappingAreas.Any(x => x.Name == RockBackArea))
+        //{
+        //    GetParent<Polygon2D>().ZIndex = 0;
+        //}
+        
+        //if (this.Name == "RockFrontArea" && overlappingAreas.Any(x => x.Name == WaveBackArea))
+        //{
+        //    GetParent<Polygon2D>().ZIndex = 0;
+        //}
     }
 }

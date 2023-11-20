@@ -16,9 +16,11 @@ public partial class Caravela : CharacterBody2D
     List<Node> flags = new List<Node>();
 	Polygon2D Body;
 	bool stoppedWaves;
+	Canon Cannon;
+	bool gameOver;
 
-	// Get the gravity from the project settings to be synced with RigidBody nodes.
-	public float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
+    // Get the gravity from the project settings to be synced with RigidBody nodes.
+    public float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
 
 	public int Lives = 3;
 
@@ -35,9 +37,34 @@ public partial class Caravela : CharacterBody2D
         flags.AddRange(GetChildren().Where(x => x.Name.ToString().Contains("Flag")));
 		flags.Reverse();
 		player.SpeedScale = 1.5f;
+
+        var canonScene = (PackedScene)ResourceLoader.Load("res://canon.tscn");
+		Node2D canonNode = (Node2D) canonScene.Instantiate();
+
+        Cannon = (Canon) canonNode.GetNode<Canon>("Canon").Duplicate();
+    
+        GetParent().GetParent().AddChild(Cannon);
     }
+
+    public override void _Input(InputEvent @event)
+    {
+        base._Input(@event);
+
+        if (stoppedWaves && @event is InputEventKey key && key.Keycode == Key.Space)
+		{
+			if (Cannon.CanShoot)
+			{
+                Cannon.GlobalPosition = new Vector2(GlobalPosition.X, GlobalPosition.Y);
+                Cannon.Shoot();
+			}
+		}
+    }
+
     public override void _PhysicsProcess(double delta)
 	{
+		if (gameOver)
+			return;
+
 		Vector2 velocity = Velocity;
 
 		// Add the gravity.
@@ -125,9 +152,33 @@ public partial class Caravela : CharacterBody2D
                 rockCrashParticles.Emitting = true;
             }
 			var animation = player.GetAnimation("Moving Forward");
-			animation.RemoveTrack(0);
-			flags[Lives-1].QueueFree();
+
+			if(Lives == 3)
+			{
+				animation.TrackSetEnabled(0, false);
+
+            }
+
+            if (Lives == 2)
+            {
+                animation.TrackSetEnabled(1, false);
+
+            }
+
+            if (Lives == 1)
+            {
+                animation.TrackSetEnabled(2, false);
+
+            }
+
+            flags[Lives-1].QueueFree();
 			Lives--;
+
+			if(Lives <= 0)
+			{
+                gameOver = true;
+                ((Main)GetParent().GetParent()).GameOver();
+            }
 		}
 	}
 }
